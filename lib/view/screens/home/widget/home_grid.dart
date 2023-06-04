@@ -65,8 +65,8 @@ class PopularStoreViewhome extends StatelessWidget {
                       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                          maxCrossAxisExtent: 200,
                         childAspectRatio: 3 / 2,
-                     crossAxisSpacing: 20,
-                        mainAxisSpacing: 20
+                     crossAxisSpacing: 10,
+                        mainAxisSpacing: 0
                       ),
                         shrinkWrap: true,
                          controller: ScrollController(),
@@ -108,8 +108,8 @@ class PopularStoreViewhome extends StatelessWidget {
                                 );
                               },
                               child: Container(
-                                height: 150,
-                                width: 200,
+                            height: 150,
+                                  width: 200,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(
@@ -141,7 +141,7 @@ class PopularStoreViewhome extends StatelessWidget {
                                             image:
                                                 '${Get.find<SplashController>().configModel.baseUrls.storeCoverPhotoUrl}'
                                                 '/${_storeList[index].coverPhoto}',
-                                            height: 90,
+                                            height: 70,
                                             width: 200,
                                             fit: BoxFit.cover,
                                           ),
@@ -222,6 +222,7 @@ class PopularStoreViewhome extends StatelessWidget {
                                           }),
                                         ),
                                       ]),
+                              
                                       Expanded(
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
@@ -310,33 +311,35 @@ class PopularStoreShimmer extends StatelessWidget {
             child: Shimmer(
               duration: Duration(seconds: 2),
               child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Container(
-                  height: 90,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(Dimensions.RADIUS_SMALL)),
-                      color: Colors.grey[300]),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              height: 10, width: 100, color: Colors.grey[300]),
-                          SizedBox(height: 5),
-                          Container(
-                              height: 10, width: 130, color: Colors.grey[300]),
-                          SizedBox(height: 5),
-                          RatingBar(rating: 0.0, size: 12, ratingCount: 0),
-                        ]),
+                  Flexible(
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                  Container(
+                    height: 90,
+                    width: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(Dimensions.RADIUS_SMALL)),
+                        color: Colors.grey[300]),
+                                  ),
+                                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: 10, width: 100, color: Colors.grey[300]),
+                            SizedBox(height: 5),
+                            Container(
+                                height: 10, width: 130, color: Colors.grey[300]),
+                            SizedBox(height: 5),
+                            RatingBar(rating: 0.0, size: 12, ratingCount: 0),
+                          ]),
+                    ),
+                                  ),
+                                ]),
                   ),
-                ),
-              ]),
             ),
           );
         },

@@ -283,15 +283,12 @@ class _ModuleViewState extends State<ModuleView> {
                 },
               ),
             ),
-            SBC.lH,
-            // Divider(
-            //   thickness: 8,
-            // ),
+       
             SBC.lH,
             PopularStoreViewhome(isPopular: false, isFeatured: true),
 
-            SBC.lH,
-            NewonFaida(isFeatured: true, isPopular: true,)
+            // SBC.lH,
+            // NewonFaida(isFeatured: true, isPopular: true,)
           ],
         ),
       );

@@ -1,5 +1,7 @@
-
-import 'package:esewa_flutter/esewa_flutter.dart';
+import 'package:esewa_flutter_sdk/esewa_config.dart';
+import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
+import 'package:esewa_flutter_sdk/esewa_payment.dart';
+import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/services.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:faidanepal/controller/auth_controller.dart';
@@ -1457,18 +1459,29 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     orderController.distance == -1 &&
                     deliveryCharge == -1) {
                   showCustomSnackBar('delivery_fee_not_set_yet'.tr);
-                } else if (orderController.paymentMethodIndex == 2) {
+                } else if (orderController.paymentMethodIndex == 1) {
                   try {
-                    EsewaPayButton(
-                      paymentConfig: ESewaConfig.dev(
-                       su: 'JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R',
-                amt: 10,
-                fu: '',
-                pid: '1212',
-                           ),
-                           width: 100,
-                           onSuccess: (rsult){
-                            List<Cart> carts = [];
+                    EsewaFlutterSdk.initPayment(
+                      esewaConfig: EsewaConfig(
+                          environment: Environment.test,
+                          clientId:
+                              "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R",
+                          secretId: "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ=="
+                          // clientId:
+                          //     Get.find<SplashController>().configModel.esewa.key,
+                          // secretId: Get.find<SplashController>()
+                          //     .configModel
+                          //     .esewa
+                          //     .secret,
+                          ),
+                      esewaPayment: EsewaPayment(
+                        productId: "1d71jd81",
+                        productName: "Faidanepal Cart",
+                        productPrice: total.toString(),
+                        callbackUrl: "",
+                      ),
+                      onPaymentSuccess: (EsewaPaymentSuccessResult data) {
+                        List<Cart> carts = [];
                         for (int index = 0; index < _cartList.length; index++) {
                           CartModel cart = _cartList[index];
                           List<int> _addOnIdList = [];
@@ -1544,42 +1557,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 parcelCategoryId: null,
                                 chargePayer: null,
                                 dmTips: _tipController.text.trim(),
-                                // esewaresult: data.toString(),
-                                khaltiresult: '', esewaresult: ''),
+                                esewaresult: data.toString(),
+                                khaltiresult: ''),
                             _callback);
                       },
-                        onFailure: (result) async{
-                            // debugPrint(":::FAILURE::: => $data");
+                      onPaymentFailure: (data) {
+                        debugPrint(":::FAILURE::: => $data");
                         showCustomSnackBar("Payment could not be completed");
-                        },
-                      // esewaConfig: EsewaConfig(
-                      //     environment: Environment.test,
-                      //     clientId:
-                      //         "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R",
-                      //     secretId: "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ=="
-                      //     // clientId:
-                      //     //     Get.find<SplashController>().configModel.esewa.key,
-                      //     // secretId: Get.find<SplashController>()
-                      //     //     .configModel
-                      //     //     .esewa
-                      //     //     .secret,
-                      //     ),
-                      // esewaPayment: EsewaPayment(
-                      //   productId: "1d71jd81",
-                      //   productName: "Faidanepal Cart",
-                      //   productPrice: total.toString(),
-                      //   callbackUrl: "",
-                      // ),
-                      // onPaymentSuccess: (EsewaPaymentSuccessResult data) {
-                        
-                      // onPaymentFailure: (data) {
-                      //   debugPrint(":::FAILURE::: => $data");
-                      //   showCustomSnackBar("Payment could not be completed");
-                      // },
-                      // onPaymentCancellation: (data) {
-                      //   debugPrint(":::CANCELLATION::: => $data");
-                      //   showCustomSnackBar("Payment cancelled by user");
-                      // },
+                      },
+                      onPaymentCancellation: (data) {
+                        debugPrint(":::CANCELLATION::: => $data");
+                        showCustomSnackBar("Payment cancelled by user");
+                      },
                     );
                   } on Exception catch (e) {
                     debugPrint("EXCEPTION : ${e.toString()}");
@@ -1587,8 +1576,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 } else if (orderController.paymentMethodIndex == 3) {
                   // showCustomSnackBar("Showing Khalti login screen");
                   final config = PaymentConfig(
-                    amount: (orderAmount *100).round(), // Amount should be in paisa
-                    // amount: ((1000 * 100).round()).toInt(),
+                    // amount: int.parse((_total*100).toString()), // Amount should be in paisa
+                    amount: ((1000 * 100).round()).toInt(),
                     productIdentity: 'Order from Faida Nepal',
                     productName: 'faidanepal.com',
                     productUrl: '',
@@ -1597,7 +1586,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       'vendor': 'faidanepal.com',
                     },
                     mobile:
-                        '9826540704', // Not mandatory; can be used to fill mobile number field
+                        '9800000001', // Not mandatory; can be used to fill mobile number field
                     mobileReadOnly:
                         false, // Not mandatory; makes the mobile field not editable
                   );
