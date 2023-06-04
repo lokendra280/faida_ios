@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1057190457922",
+    "project_id": "faidanepal",
+    "storage_bucket": "faidanepal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057190457922:android:2c044bd8996a55229bb3db",
+        "android_client_info": {
+          "package_name": "com.twentyfirsttech.FaidaNepal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057190457922-9abf762cam0lb80ktj521b2c4f7i1l9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBO9-KCAfgMRkiIqeGn81xx807Jt2C2vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057190457922-9abf762cam0lb80ktj521b2c4f7i1l9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057190457922:android:89a1834921a97c739bb3db",
+        "android_client_info": {
+          "package_name": "com.twentyfirsttech.faidanepal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057190457922-9abf762cam0lb80ktj521b2c4f7i1l9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBO9-KCAfgMRkiIqeGn81xx807Jt2C2vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057190457922-9abf762cam0lb80ktj521b2c4f7i1l9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
